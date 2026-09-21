@@ -6,6 +6,25 @@
   <title>Homerseklet</title>
 </head>
 <body>
+  <div class="container">
+    <h1>Időjárás</h1>
+    <form id="idojarasForm">
+      <div class="input-group">
+        <label for="homerseklet">Hőmérséklet</label>
+        <input type="number" min="-40" max="50" name="homerseklet" id="homersekletInput">
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Nap</th>
+          <th>Hőmérséklet</th>
+        </tr>
+      </thead>
+      <tbody id="idojarasTBody">
+      </tbody>
+    </table>
+  </div>
   <script type="module" src="./src/scripts/main.ts"></script>
 </body>
 </html>
