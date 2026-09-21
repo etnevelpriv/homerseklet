@@ -6,13 +6,11 @@ export class Homerseklet implements Homerseklet_Interface {
         this.day = day;
         this.temperature = temperature;
     };
-    toCSV(homerseklet: Homerseklet) {
+    toJSON() {
         return(
-`
-\{
-day:${homerseklet.day},
-temperature:${homerseklet.temperature}
-\},
-`)
+`\{
+    day:${this.day},
+    temperature:${this.temperature}
+\},`)
     };
 };

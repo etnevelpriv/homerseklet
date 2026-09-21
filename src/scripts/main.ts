@@ -1,10 +1,11 @@
 import { Homerseklet } from "./models/Homerseklet.Class";
 import "../styles/style.css";
+import type { Homerseklet_Interface } from "./models/Homerseklet.Interface";
 
 const init = async function () {
     const idojarasData = await fetchIdojaras();
-    console.log(idojarasData)
-    const idojarasArr = [...idojarasData]
+    console.log(idojarasData);
+    const idojarasArr: Homerseklet[] = fetchedDataToClassElements(idojarasData)
     printIdojarasTable(idojarasArr);
     document.getElementById("formButton")?.addEventListener("click", () => {
         const formElement = document.getElementById("idojarasForm") as HTMLFormElement;
@@ -19,11 +20,22 @@ const init = async function () {
         formElement.reset();
     });
     document.getElementById("exportButton")?.addEventListener("click", () => {
-        const startingString = `\[\n`
-        const endString = `\n\]`
+        let startingString = `\[`
+        let endString = `\]`
+        let json = ``;
         idojarasArr.forEach((idojaras: Homerseklet) => {
-            
+            const obj = idojaras.toJSON();
+            json += obj;
         });
+        const modifiedJson = json.slice(0,-1)
+        startingString += modifiedJson;
+        startingString += endString;
+        const textAreaElement = document.getElementById("exportTextArea") as HTMLElement;
+        textAreaElement.textContent = startingString;
+        textAreaElement.classList.add("show")
+        console.log(json);
+        console.log(startingString);
+
     });
 };
 
@@ -67,6 +79,15 @@ const fetchIdojaras = async function () {
     } catch (err: Error | any) {
         throw new Error(err);
     };
+};
+
+const fetchedDataToClassElements = function (homersekletArr: Homerseklet_Interface[]) {
+    const arr:Homerseklet[] = []
+    homersekletArr.forEach((homersekletData: Homerseklet_Interface) => {
+        const homerseklet = new Homerseklet(homersekletData.day, homersekletData.temperature);
+        arr.push(homerseklet);
+    });
+    return arr;
 };
 
 document.addEventListener("DOMContentLoaded", init);

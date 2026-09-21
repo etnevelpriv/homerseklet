@@ -79,6 +79,22 @@ body {
         tr.tr-kek {
             background-color: #80a8ff;
         }
-
+    }
+    .export-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .export-text {
+            width: 300px;
+            height: 400px;
+            opacity: 0;
+        }
+        .export-text.show {
+            opacity: 1;
+        }
+        .export-button {
+            height: 50px;
+        }
     }
 }
