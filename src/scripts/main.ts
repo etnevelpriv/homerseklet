@@ -4,12 +4,34 @@ import "../styles/style.css";
 const init = async function () {
     const idojarasData = await fetchIdojaras();
     console.log(idojarasData)
-    printIdojarasTable(idojarasData);
-
-}
+    const idojarasArr = [...idojarasData]
+    printIdojarasTable(idojarasArr);
+    document.getElementById("formButton")?.addEventListener("click", () => {
+        const formElement = document.getElementById("idojarasForm") as HTMLFormElement;
+        const idojarasElement = document.getElementById("homersekletInput") as HTMLInputElement;
+        const idojaras = idojarasElement.value;
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const napNumber = new Date().getUTCDay();
+        const nap = days[napNumber - 1];
+        const homerseklet = new Homerseklet(nap, Number(idojaras));
+        idojarasArr.push(homerseklet);
+        printIdojarasTable(idojarasArr);
+        formElement.reset();
+    });
+    document.getElementById("exportButton")?.addEventListener("click", () => {
+        const startingString = `\[\n`
+        const endString = `\n\]`
+        idojarasArr.forEach((idojaras: Homerseklet) => {
+            
+        });
+    });
+};
 
 const printIdojarasTable = function (arr: Homerseklet[]) {
     const TBodyElement = document.getElementById("idojarasTBody")
+    while (TBodyElement?.firstChild) {
+        TBodyElement.removeChild(TBodyElement.firstChild);
+    };
     arr.forEach((homersekletAdat: Homerseklet) => {
         const homerseklet = new Homerseklet(homersekletAdat.day, homersekletAdat.temperature);
 

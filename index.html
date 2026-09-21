@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homerseklet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
+
 <body>
   <div class="container">
     <h1>Időjárás</h1>
     <form id="idojarasForm">
       <div class="input-group">
         <label for="homerseklet">Hőmérséklet</label>
-        <input type="number" min="-40" max="50" name="homerseklet" id="homersekletInput">
+        <input type="number" required min="-40" max="50" name="homerseklet" id="homersekletInput">
       </div>
+      <input type="button" id="formButton" value="Mentés">
     </form>
     <table>
       <thead>
@@ -24,7 +29,15 @@
       <tbody id="idojarasTBody">
       </tbody>
     </table>
+    <div class="export-container">
+      <textarea id="exportTextArea" class="export-text">
+
+    </textarea>
+      <button id="exportButton">Export</button>
+    </div>
+
   </div>
   <script type="module" src="./src/scripts/main.ts"></script>
 </body>
+
 </html>
